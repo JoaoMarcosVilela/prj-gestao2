@@ -38,3 +38,23 @@ cd prj-gestao2
 - Caso você não tenha nada prenchido no banco de dados retornará uma lista vazia, mas como eu já tinha realizado o cadastro de dois documentos ele me retornou os dois que tinham.
 
 ![Postaman](/img/Postaman3.png)
+
+## Passos para utilizar o método post
+
+- Utilizaremos o mesmo postman, sendo que ao invés de usarmos o método get, agora iremos utilizar o método post.
+
+![Postaman](/img/Postaman4.png)
+
+- Vamos em body, depois clicamos em raw e selecionamos o tipo para JSON
+
+![Postaman](/img/Postaman5.png)
+
+- Utilizamos essa estrutura de prenchimento JSON, após iremos enviar em send, e esperaremos como resultado o status 201. Isso significa que foi realizado a inserção no BD.
+
+![Postaman](/img/Postaman6.png)
+
+## Qual workflow utilizei?
+
+Eu utilizei o Github flow, pois ele era o melhor modelo que se enquadrava no que foi pedido, não era nada complexo, que precissase de varias branches, apenas uma para adicionar a nova feature, que era a de adicionar o metodo post, e realizando o merge com a branch main. Ficando com a seguinte estrutura:
+
+![Github flow](/img/DiagramaGithubFlow.png)
