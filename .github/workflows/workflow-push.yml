@@ -19,6 +19,9 @@ jobs:
         with:
           node-version: '21'
 
+      - name: Instalando Jest
+          run: npm install --save-dev jest
+
       - name: Instalando dependências do projeto
         run: npm install
 
