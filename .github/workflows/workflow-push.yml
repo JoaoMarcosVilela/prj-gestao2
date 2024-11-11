@@ -19,12 +19,6 @@ jobs:
         with:
           node-version: '21'
 
-      - name: Instalando Jest
-          run: npm install --save-dev jest
-      
-      - name: Instalando Jest
-          run: npm install --save-dev supertest
-
       - name: Instalando dependências do projeto
         run: npm install
 
