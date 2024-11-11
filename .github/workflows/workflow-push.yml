@@ -1,23 +1,26 @@
 name: Workflow para verificar novos commits
 run-name: ${{ github.actor }} está enviando um novo commit
-on: 
+
+on:
   push:
     branches:
       - feat/post
+
 jobs:
   build-and-tests:
-    runs-on: ubuntu-latest  
-    steps: 
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Clonando o repositório e trocando para a branch correta
-        uses: actions/checkout@v4
-        
-      - name: Instalando o Node.js versão 21  
+        uses: actions/checkout@v4 
+
+      - name: Instalando o Node.js versão 21
         uses: actions/setup-node@v3
-        with:	
-          node-version: '21'  
+        with:
+          node-version: '21'
 
       - name: Instalando dependências do projeto
         run: npm install
-	
+
       - name: Rodando os testes
         run: npm test
