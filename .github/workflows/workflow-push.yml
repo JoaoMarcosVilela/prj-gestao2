@@ -3,7 +3,7 @@ run-name: ${{ github.actor }} está enviando um novo commit
 on: 
   push:
     branches:
-      - 'feat/*'
+      - feat/post
 jobs:
   build-and-tests:
     runs-on: ubuntu-latest  
