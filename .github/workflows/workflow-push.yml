@@ -16,11 +16,8 @@ jobs:
         with:	
           node-version: '21'  
 
-      - name: Instalando a dependência BATS globalmente
-        run: npm install -g bats
-
       - name: Instalando dependências do projeto
         run: npm install
 	
-      - name: Rodando a aplicação
-        run: npm start
+      - name: Rodando os testes
+        run: npm test

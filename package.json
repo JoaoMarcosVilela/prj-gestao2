@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "nanoid": "^4.0.2"
   },
   "devDependencies": {
+    "mongodb-memory-server": "^10.1.2",
     "nodemon": "^2.0.22"
   }
 }
