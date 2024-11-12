@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - feat/post
-      - feat/workflow
+      - feat/workflows
 
 jobs:
   build-and-tests:
