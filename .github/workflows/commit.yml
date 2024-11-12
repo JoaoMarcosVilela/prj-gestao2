@@ -1,0 +1,37 @@
+name: Commit
+run-name: ${{ github.actor }} está enviando um novo commit
+
+on:
+  push:
+    branches:
+      - feat/post
+      - feat/workflows
+
+jobs:
+  build-and-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonando o repositório e trocando para a branch correta
+        uses: actions/checkout@v2 
+
+      - name: Instalando o Node.js versão 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Intalando o Jest
+        run: npm install --save-dev jest
+
+      - name: Instalando o Supertest
+        run: npm install supertest
+
+      - name: Instalando dependências do projeto
+        run: npm install
+
+      - name: Ajustar permissões de execução do Jest
+        run: chmod +x node_modules/.bin/jest
+
+      - name: Rodando os testes
+        run: npx jest
+
