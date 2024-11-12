@@ -1,5 +1,4 @@
-name: Workflow para verificar novos commits
-run-name: ${{ github.actor }} está enviando um novo commit
+name: Commit
 
 on:
   push:
