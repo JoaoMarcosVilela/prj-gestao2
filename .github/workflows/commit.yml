@@ -1,0 +1,31 @@
+name: Workflow para verificar novos commits
+run-name: ${{ github.actor }} está enviando um novo commit
+
+on:
+  push:
+    branches:
+      - feat/post
+      - feat/workflow
+
+jobs:
+  build-and-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonando o repositório e trocando para a branch correta
+        uses: actions/checkout@v4 
+
+      - name: Instalando o Node.js versão 21
+        uses: actions/setup-node@v3
+        with:
+          node-version: '21'  # Ou qualquer versão que você precise
+
+      - name: Instalando dependências do projeto
+        run: npm install  # Instala todas as dependências, incluindo Jest e supertest
+
+      - name: Ajustar permissões de execução do Jest
+        run: chmod +x node_modules/.bin/jest  # Garantir que o Jest tenha permissão para ser executado
+
+      - name: Rodando os testes
+        run: npx jest  # Usar npx para rodar o Jest
+
