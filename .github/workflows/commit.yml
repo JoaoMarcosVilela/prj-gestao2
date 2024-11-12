@@ -15,10 +15,10 @@ jobs:
       - name: Clonando o repositório e trocando para a branch correta
         uses: actions/checkout@v2 
 
-      - name: Instalando o Node.js versão 20
+      - name: Instalando o Node.js versão 21
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '21'
 
       - name: Intalando o Jest
         run: npm install --save-dev jest
