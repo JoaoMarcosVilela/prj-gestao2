@@ -17,10 +17,14 @@ jobs:
       - name: Instalando o Node.js versão 21
         uses: actions/setup-node@v3
         with:
-          node-version: '21'
+          node-version: '21'  # Ou qualquer versão que você precise
 
       - name: Instalando dependências do projeto
-        run: npm install
+        run: npm install  # Instala todas as dependências, incluindo Jest e supertest
+
+      - name: Ajustar permissões de execução do Jest
+        run: chmod +x node_modules/.bin/jest  # Garantir que o Jest tenha permissão para ser executado
 
       - name: Rodando os testes
-        run: npx test
+        run: npx jest  # Usar npx para rodar o Jest
+
