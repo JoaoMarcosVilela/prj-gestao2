@@ -1,4 +1,5 @@
 name: Pull request
+run-name: ${{ github.actor }} está enviando um novo pull request
 
 on:
   pull_request:
