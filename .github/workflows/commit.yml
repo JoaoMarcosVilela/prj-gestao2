@@ -23,15 +23,6 @@ jobs:
       - name: Intalando o Jest
         run: npm install --save-dev jest
 
-      - name: Instalando o Supertest
-        run: npm install supertest
-
-      - name: Instalando dependências do projeto
-        run: npm install
-
-      - name: Ajustar permissões de execução do Jest
-        run: chmod +x node_modules/.bin/jest
-
       - name: Rodando os testes
         run: npx jest
 
