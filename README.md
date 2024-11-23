@@ -1,4 +1,3 @@
-# Testando Proteção de branches enviando do local
 # Como rodar a aplicação
 
 ## Software necessários
