@@ -1,4 +1,3 @@
-# Testando Proteção de branches en
 # Como rodar a aplicação
 
 ## Software necessários
