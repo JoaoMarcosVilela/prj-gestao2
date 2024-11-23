@@ -35,3 +35,27 @@ jobs:
       - name: Rodando os testes
         run: npx jest
 
+  test-qualidade:
+    runs-on: ubuntu-latest
+    needs: build-and-tests
+
+    steps:
+      - name: Clonando o repositório
+        uses: actions/checkout@v2
+
+      - name: Instalando o Node.js versão 21
+        uses: actions/setup-node@v3
+        with:
+          node-version: '21'
+
+      - name: Instalando dependências do projeto
+        run: npm install
+
+      - name: Verificando cobertura de código com Jest
+        run: npx jest --coverage
+
+      - name: Instalar o linter e outras dependências de qualidade
+        run: npm install --save-dev eslint
+
+      - name: Rodando o Linter
+        run: npx eslint .
