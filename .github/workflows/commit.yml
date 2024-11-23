@@ -20,9 +20,6 @@ jobs:
         with:
           node-version: '21'
 
-      - name: Intalando o Jest
-        run: npm install --save-dev jest
-
       - name: Rodando os testes
         run: npx jest
 
