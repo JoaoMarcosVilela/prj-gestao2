@@ -16,7 +16,7 @@ describe('Testar rota GET', () => {
 });
 
 describe('Testar a rota POST', () => {
-    it('deve criar um novo filme e retornar com status 201', async () => {
+    it('Deve criar um novo filme e retornar com status 201', async () => {
         const response = await request(app)
             .post('/filmes')
             .send({ nome: 'Filme 3' });

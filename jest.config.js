@@ -1,4 +1,3 @@
 module.exports = {
-    testEnvironment: 'node',
-    testMath: './tests'
+    testEnvironment: 'node'
 }
