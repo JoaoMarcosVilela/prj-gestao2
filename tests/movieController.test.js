@@ -36,7 +36,7 @@ describe('Testar a rota DELETE', () => {
         expect(response.status).toBe(204);
     });
 
-    it('Deve não encontrar o filme e reornar 404', async () => {
+    it('Deve não encontrar o filme e retornar 404', async () => {
         const response = await request(app).delete('/filmes/999');
 
         expect(response.status).toBe(404);
