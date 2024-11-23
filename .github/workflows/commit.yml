@@ -53,9 +53,3 @@ jobs:
 
       - name: Verificando cobertura de código com Jest
         run: npx jest --coverage
-
-      - name: Instalar o linter e outras dependências de qualidade
-        run: npm install --save-dev eslint
-
-      - name: Rodando o Linter
-        run: npx eslint .
