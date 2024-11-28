@@ -30,15 +30,15 @@ describe('Testar a rota POST', () => {
 });
 
 describe('Testar a rota DELETE', () => {
-    // it('Deve deletar um filme e retornar com status 204', async () => {
-    //     const response = await request(app).delete('/filmes/1');
+    it('Deve deletar um filme e retornar com status 204', async () => {
+        const response = await request(app).delete('/filmes/1');
 
-    //     expect(response.status).toBe(204);
-    // });
+        expect(response.status).toBe(204);
+    });
 
-    // it('Deve não encontrar o filme e retornar 404', async () => {
-    //     const response = await request(app).delete('/filmes/999');
+    it('Deve não encontrar o filme e retornar 404', async () => {
+        const response = await request(app).delete('/filmes/999');
 
-    //     expect(response.status).toBe(404);
-    // });
+        expect(response.status).toBe(404);
+    });
 });
