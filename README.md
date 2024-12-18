@@ -1,4 +1,5 @@
 
+
 # Como rodar a aplicação com Vagrant
 
 ## Software necessários
@@ -46,9 +47,7 @@ curl http://192.168.56.11:3000/api/filmes
 ![TerminalGet](/img/TerminalGet.png)
 
 
-
 # Como rodar a aplicação sem o Vagrant
-
 ## Software necessários
 
 - MongoDB
