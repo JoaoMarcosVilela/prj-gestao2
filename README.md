@@ -1,5 +1,53 @@
-# Como rodar a aplicação
 
+
+# Como rodar a aplicação com Vagrant
+
+## Software necessários
+
+- Vagrant
+- Node.JS
+- VirtualBox
+
+## Passos
+
+- Primeiro utilize esse comando para clonar o repositório: 
+```sh
+ git clone https://github.com/JoaoMarcosVilela/prj-gestao2.git 
+```
+
+- Entre na pasta
+```sh
+cd prj-gestao2
+```
+- Instale as dependências
+```sh
+npm install
+```
+
+- Execulte o comando Vagrant para subir as VMs
+```sh
+vagrant up
+```
+## Aguarde...
+
+- Depois que o terminal ficar dessa forma, inicie outro terminal no mesmo diretório
+![Terminal](/img/Terminal.png)
+
+- Assim que iniciar um novo terminal no mesmo diretório, use esse comando para se conectar na VM1
+```sh
+vagrant ssh vm1
+```
+
+- Conectado na VM1, utilize esse comando para realizar um get na API da VM2
+```sh
+curl http://192.168.56.11:3000/api/filmes
+```
+
+- Será retornado um JSON, com os nomes dos filmes:
+![TerminalGet](/img/TerminalGet.png)
+
+
+# Como rodar a aplicação sem o Vagrant
 ## Software necessários
 
 - MongoDB
