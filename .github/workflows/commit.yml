@@ -65,7 +65,10 @@ jobs:
         uses: sonarsource/sonarcloud-github-action@v2
         with:
           entryPoint: "sonar-scanner"
-          args: "-Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ secrets.SONAR_ORG }}"
+          args: |
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.organization=${{ secrets.SONAR_ORG }}
+            -Dsonar.branch.name=${{ github.ref_name }}  # Aqui pegamos o nome do branch atual
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
