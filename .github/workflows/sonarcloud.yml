@@ -3,10 +3,10 @@ name: SonarCloud Scan
 on:
   push:
     branches:
-      - main
+      - feat/sonarcloud
   pull_request:
     branches:
-      - main
+      - feat/sonarcloud
 
 jobs:
   sonarcloud:
