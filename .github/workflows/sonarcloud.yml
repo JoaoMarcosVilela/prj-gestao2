@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Use the version of Node.js your project requires
+          node-version: "16" # Use the version of Node.js your project requires
 
       - name: Cache Node.js dependencies
         uses: actions/cache@v2
@@ -40,6 +40,7 @@ jobs:
           npx sonar-scanner \
             -Dsonar.organization=${{ secrets.SONAR_ORG }} \
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
-            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.branch.name=${{ github.head_ref }}  # Automatically fetches the branch name for PRs
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
