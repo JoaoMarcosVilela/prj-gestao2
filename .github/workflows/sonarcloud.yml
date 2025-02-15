@@ -1,51 +1,45 @@
-name: Build
+name: SonarCloud Scan
 
 on:
   push:
     branches:
-      - main  # A branch principal que aciona o workflow (você pode mudar para outras branches, se necessário)
+      - main
   pull_request:
-    types: [opened, synchronize, reopened]
     branches:
-      - main  # A branch principal que aciona o workflow para pull requests
+      - main
 
 jobs:
   sonarcloud:
-    name: SonarCloud
+    name: Scan on SonarCloud
     runs-on: ubuntu-latest
-
     steps:
-      # 1. Checkout do código
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Clone completo para análise mais precisa
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      # 2. Configurar o Node.js
-      - uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
         with:
-          node-version: '21'  # Defina a versão do Node.js que você está usando
+          node-version: '21'
 
-      # 3. Instalar dependências do projeto
-      - name: Instalando dependências
+      - name: Cache Node.js dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
         run: npm install
 
-      # 4. Rodar os testes
-      - name: Rodando os testes
-        run: npx jest  # Caso você esteja usando o Jest para testes
+      - name: Install SonarScanner
+        run: npm install --save-dev sonar-scanner
 
-      # 5. Gerar cobertura de código (caso deseje gerar um relatório)
-      - name: Gerar cobertura de código
+      - name: Run SonarCloud Scanner
         run: |
-          npx jest --coverage  # Gera a cobertura dos testes
-
-      # 6. Rodar o SonarCloud Scan
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@v2
-        with:
-          entryPoint: "sonar-scanner"
-          args: >
-            -Dsonar.organization=${{ secrets.SONAR_ORG }}
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+          npx sonar-scanner \
+            -Dsonar.organization=${{ secrets.SONAR_ORG }} \
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
             -Dsonar.host.url=https://sonarcloud.io
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Token de acesso ao SonarCloud
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
