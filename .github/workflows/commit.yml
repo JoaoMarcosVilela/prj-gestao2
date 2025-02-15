@@ -68,7 +68,7 @@ jobs:
           args: |
             -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
             -Dsonar.organization=${{ secrets.SONAR_ORG }}
-            -Dsonar.branch.name=${{ github.ref_name }}  # Aqui pegamos o nome do branch atual
+            -Dsonar.branch.name=${{ github.ref_name == 'refs/heads/main' && 'main' || github.ref_name }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
