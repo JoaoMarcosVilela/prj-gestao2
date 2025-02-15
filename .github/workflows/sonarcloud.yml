@@ -19,7 +19,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16" # Defina a versão do Node.js que seu projeto usa
+          node-version: '16'  # Use the version of Node.js your project requires
 
       - name: Cache Node.js dependencies
         uses: actions/cache@v2
@@ -36,11 +36,10 @@ jobs:
         run: npm install --save-dev sonar-scanner
 
       - name: Run SonarCloud Scanner
-        run: npx sonar-scanner
+        run: |
+          npx sonar-scanner \
+            -Dsonar.organization=${{ secrets.SONAR_ORG }} \
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
+            -Dsonar.host.url=https://sonarcloud.io
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.organization=${{ secrets.SONAR_ORG }}
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
-            -Dsonar.host.url=https://sonarcloud.io
