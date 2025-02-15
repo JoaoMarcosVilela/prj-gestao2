@@ -52,21 +52,3 @@ jobs:
 
       - name: Verificando cobertura de código com Jest
         run: npx jest --coverage
-
-  sonarcloud:
-    runs-on: ubuntu-latest
-    needs: test-qualidade
-    steps:
-      - name: Clonando o repositório
-        uses: actions/checkout@v2
-
-      - name: Configurando o SonarCloud
-        uses: sonarsource/sonarcloud-github-action@v2
-        with:
-          entryPoint: "sonar-scanner"
-          args: "-Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ secrets.SONAR_ORG }}"
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-
-      - name: Executando a análise no SonarCloud
-        run: npx sonar-scanner
