@@ -63,9 +63,10 @@ jobs:
       - name: Configurando o SonarCloud
         uses: sonarsource/sonarcloud-github-action@v2
         with:
-          sonar-token: ${{ secrets.SONAR_TOKEN }}
+          entryPoint: "sonar-scanner"
+          args: "-Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} -Dsonar.organization=${{ secrets.SONAR_ORG }}"
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Executando a análise no SonarCloud
-        run: |
-          npm install
-          npx sonar-scanner
+        run: npx sonar-scanner
