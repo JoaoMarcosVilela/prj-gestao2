@@ -1,46 +1,51 @@
-name: SonarCloud Scan
+name: Build
 
 on:
   push:
     branches:
-      - feat/sonarcloud
+      - main  # A branch principal que aciona o workflow (você pode mudar para outras branches, se necessário)
   pull_request:
+    types: [opened, synchronize, reopened]
     branches:
-      - feat/sonarcloud
+      - main  # A branch principal que aciona o workflow para pull requests
 
 jobs:
   sonarcloud:
-    name: Scan on SonarCloud
+    name: SonarCloud
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      # 1. Checkout do código
+      - uses: actions/checkout@v4
         with:
-          node-version: "16" # Use the version of Node.js your project requires
+          fetch-depth: 0  # Clone completo para análise mais precisa
 
-      - name: Cache Node.js dependencies
-        uses: actions/cache@v2
+      # 2. Configurar o Node.js
+      - uses: actions/setup-node@v3
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: '21'  # Defina a versão do Node.js que você está usando
 
-      - name: Install dependencies
+      # 3. Instalar dependências do projeto
+      - name: Instalando dependências
         run: npm install
 
-      - name: Install SonarScanner
-        run: npm install --save-dev sonar-scanner
+      # 4. Rodar os testes
+      - name: Rodando os testes
+        run: npx jest  # Caso você esteja usando o Jest para testes
 
-      - name: Run SonarCloud Scanner
+      # 5. Gerar cobertura de código (caso deseje gerar um relatório)
+      - name: Gerar cobertura de código
         run: |
-          npx sonar-scanner \
-            -Dsonar.organization=${{ secrets.SONAR_ORG }} \
-            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.branch.name=${{ github.head_ref }}  # Automatically fetches the branch name for PRs
+          npx jest --coverage  # Gera a cobertura dos testes
+
+      # 6. Rodar o SonarCloud Scan
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@v2
+        with:
+          entryPoint: "sonar-scanner"
+          args: >
+            -Dsonar.organization=${{ secrets.SONAR_ORG }}
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }}
+            -Dsonar.host.url=https://sonarcloud.io
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  # Token de acesso ao SonarCloud
